@@ -69,8 +69,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ REPO }}:latest
-            ${{ REPO }}:${{ github.sha }}
+            ghcr.io/${{ env.REPO }}:latest
+            ghcr.io/${{ env.REPO }}:${{ github.sha }}
       - 
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

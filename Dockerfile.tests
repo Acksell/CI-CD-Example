@@ -1,6 +1,10 @@
 # use a decent small lightweight image.
 FROM python:3.8-slim-buster
 
+# Change workdir to /app. Just use something other then the root since 
+# pytest seems to freaks out otherwise (there goes 1 hour of my life).
+WORKDIR /app
+
 # first copy the requirements file to container.
 COPY requirements.dev.txt .
 RUN pip install -r requirements.dev.txt
@@ -11,5 +15,6 @@ RUN pip install -r requirements.dev.txt
 # change the code at any point, we would have to reinstall the
 # requirements (because of how docker caches previous builds).
 COPY . .
+RUN pip install pytest
 
-ENTRYPOINT ["pytest"]
+ENTRYPOINT ["python","-m","pytest"]

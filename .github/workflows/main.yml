@@ -59,7 +59,7 @@ jobs:
         name: Lowercase repo name
         # convert repository to lowercase because buildx needs it to be.
         run: |
-          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+          echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
       -
         name: Build and push
         id: docker_build
@@ -69,8 +69,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${REPO}:latest
-            ${REPO}:${{ github.sha }}
+            ${{ REPO }}:latest
+            ${{ REPO }}:${{ github.sha }}
       - 
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

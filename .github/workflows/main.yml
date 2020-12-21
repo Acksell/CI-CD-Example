@@ -63,7 +63,9 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: acksell/ci-cd-example:latest
+          tags: |
+            ${{ github.repository }}:latest
+            ${{ github.repository }}:${{ github.sha }}
       - 
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

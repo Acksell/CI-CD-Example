@@ -13,7 +13,7 @@ From [https://docs.github.com/en/free-pro-team@latest/packages/guides/about-gith
 
 >Note: GitHub Container Registry is currently in public beta and subject to change. During the beta, storage and bandwidth are free. To use GitHub Container Registry, you must enable the feature for your account. For more information, see ["Enabling improved container support."](https://docs.github.com/en/free-pro-team@latest/packages/guides/enabling-improved-container-support)
 
-In order for this repository's workflow to work you also need to [set a secret](https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets) in your project repository for the github actions workflow to work: `GHCR_PAT`, a personalized access token. This currently the only way to access the Github Container Registry via Github Actions. [Read more about how to issue one and what privileges to give it](https://docs.github.com/en/free-pro-team@latest/packages/guides/pushing-and-pulling-docker-images).
+In order for this repository's workflow to work you also need to [set a secret](https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets) in your project repository for the github actions workflow to work: `GHCR_PAT`, a personalized access token. This is currently the only way to access the Github Container Registry via Github Actions. [Read more about how to issue one and what privileges to give it](https://docs.github.com/en/free-pro-team@latest/packages/guides/pushing-and-pulling-docker-images).
 
 If the repository resides under an organization you might want to create a new user solely for the purpose of issuing this PAT. You also have to change the workflow to use that username since `${{ github.repository_owner }}` will otherwise refer to the organization in the following stage of the deploy job:
 
@@ -43,6 +43,6 @@ This will generate a `~/.docker/config.json` file that is later mounted as a vol
 
 ### Running
 
-Simply run the provided `./start_watchtower.sh` script! There is some more documentation about different arguments and watchtower in the file itself.
+Simply run the provided `./start_watchtower.sh` script to start the watchtower container! It is set to poll for new images every 5 minutes, you can change this (and more) in the script itself, where you can find more documentation about different arguments and watchtower.
 
 >Note: One might want to create a symlink to the config file instead of mounting the config file directly in order for changes to propagate properly to the watchtower container. Read more: https://containrrr.dev/watchtower/usage-overview/. 
